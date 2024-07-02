@@ -16,8 +16,8 @@ public class PlayerController : MonoBehaviour
     [Header("PlayerParts")]
     public GameObject basket;
     public GameObject bounceBox;
-    private Vector2 basketOffsetValue = new Vector2(0.7f, 0f); // used when the player moves left and right to put the basket box in the right place
-    private Vector2 playerOffsetValue = new Vector2(0.43f, 1.1f); //^ but for the players hitbox's
+    private Vector2 basketOffsetValue = new Vector2(1.05f, 0f); // used when the player moves left and right to put the basket box in the right place
+    private Vector2 playerOffsetValue = new Vector2(0.1f, 1.1f); //^ but for the players hitbox's
     [Header("Player Values")]
     public float moveSpeed;
     public float jumpForce;
