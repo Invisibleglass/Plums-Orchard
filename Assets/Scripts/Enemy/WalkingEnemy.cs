@@ -5,15 +5,15 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D), typeof(SpriteRenderer))]
 public class WalkingEnemy : MonoBehaviour
 {
-    private Rigidbody2D rb;
-    private Animator anim;
-    private SpriteRenderer sr;
+    protected Rigidbody2D rb;
+    protected Animator anim;
+    protected SpriteRenderer sr;
 
-    Vector3 centerScreen = new Vector3(0f, 0f, 0f);
+    protected Vector3 centerScreen = new Vector3(0f, 0f, 0f);
 
-    private GameObject[] targets;
-    private GameObject currentTarget;
-    private bool dieingBool = false;
+    protected GameObject[] targets;
+    protected GameObject currentTarget;
+    protected bool dieingBool = false;
 
     [Header("Varibles")]
     public float speed;
@@ -22,7 +22,7 @@ public class WalkingEnemy : MonoBehaviour
     public float deathTime;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -44,7 +44,7 @@ public class WalkingEnemy : MonoBehaviour
         StartCoroutine(ChangeDirectionRoutine());
     }
 
-    IEnumerator ChangeDirectionRoutine()
+    protected IEnumerator ChangeDirectionRoutine()
     {
         while (!dieingBool)
         {
@@ -67,7 +67,7 @@ public class WalkingEnemy : MonoBehaviour
 
     }
 
-    IEnumerator Death()
+    protected IEnumerator Death()
     {
         yield return new WaitForSeconds(deathTime);
 
@@ -75,7 +75,7 @@ public class WalkingEnemy : MonoBehaviour
     }
 
     // FixedUpdate is used for physics calculations
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         Debug.Log("current mouse target" + currentTarget);
         if (currentTarget != null)
@@ -88,7 +88,7 @@ public class WalkingEnemy : MonoBehaviour
         }
     }
 
-    public void DeathAnimation()
+    public virtual void DeathAnimation()
     {
         currentTarget = null;
         dieingBool = true;
