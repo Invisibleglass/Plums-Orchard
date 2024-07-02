@@ -12,5 +12,4 @@ public class Player2Controller : PlayerController
 
         jumpsRemaining = jumpsAllowed;
     }
-
 }
