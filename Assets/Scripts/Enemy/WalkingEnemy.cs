@@ -11,7 +11,15 @@ public class WalkingEnemy : MonoBehaviour
 
     Vector3 centerScreen = new Vector3(0f, 0f, 0f);
 
-    private bool startRightBool;
+    private GameObject[] targets;
+    private GameObject currentTarget;
+    private bool dieingBool = false;
+
+    [Header("Varibles")]
+    public float speed;
+    public float changeDirectionIntervalMin;
+    public float changeDirectionIntervalMax;
+    public float deathTime;
 
     // Start is called before the first frame update
     void Start()
@@ -19,34 +27,85 @@ public class WalkingEnemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+        targets = GameObject.FindGameObjectsWithTag("target");
 
         if (this.transform.position.x > centerScreen.x)
         {
             sr.flipX = false;
-            startRightBool = true;
+            currentTarget = targets[1];
         }
         else
         {
             sr.flipX = true;
-            startRightBool = false;
+            currentTarget = targets[0];
+        }
+
+        // Start coroutine for changing direction
+        StartCoroutine(ChangeDirectionRoutine());
+    }
+
+    IEnumerator ChangeDirectionRoutine()
+    {
+        while (!dieingBool)
+        {
+            // Randomly determine how long to wait before changing direction
+            float waitTime = Random.Range(changeDirectionIntervalMin, changeDirectionIntervalMax);
+            yield return new WaitForSeconds(waitTime);
+
+            // Determine new target based on current position relative to centerScreen
+            if (currentTarget != targets[0])
+            {
+                currentTarget = targets[0];
+                sr.flipX = true;
+            }
+            else
+            {
+                currentTarget = targets[1];
+                sr.flipX = false;
+            }
+        }
+
+    }
+
+    IEnumerator Death()
+    {
+        yield return new WaitForSeconds(deathTime);
+
+        Destroy(this.gameObject);
+    }
+
+    // FixedUpdate is used for physics calculations
+    void FixedUpdate()
+    {
+        Debug.Log("current mouse target" + currentTarget);
+        if (currentTarget != null)
+        {
+            // Calculate direction towards the current target
+            Vector2 direction = (currentTarget.transform.position - transform.position).normalized;
+
+            // Apply velocity based on calculated direction
+            rb.velocity = direction * speed;
         }
     }
 
-    private void FixedUpdate()
+    public void DeathAnimation()
     {
-        if (startRightBool)
+        currentTarget = null;
+        dieingBool = true;
+        if (sr.sprite.name == "snek_2_11")
         {
-            rb.velocity.Set()
+            anim.Play("Hurt");
         }
         else
         {
-            
+            anim.Play("Hurt2");
         }
+        StartCoroutine(Death());
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
