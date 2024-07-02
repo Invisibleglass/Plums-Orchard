@@ -5,8 +5,8 @@ using UnityEngine;
 public class Snek : WalkingEnemy
 {
     private bool startedDirectionSwitcherBool = false;
-    private Vector2 landingOffsetValue = new Vector2(0f, 0.24f); // when the snake lands his boxcollider needs to change with animation size
-    private Vector2 landingSizeValue = new Vector2(0.65f, 0.5f); //^
+    private Vector2 landingOffsetValue = new Vector2(0f, 0.4f); // when the snake lands his boxcollider needs to change with animation size
+    private Vector2 landingSizeValue = new Vector2(1.17f, 0.77f); //^
     [Header("Connections")]
     public GameObject bounceBox;
 
