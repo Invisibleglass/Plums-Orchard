@@ -6,9 +6,9 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator), typeof(SpriteRenderer))]
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody2D rb;
-    private Animator anim;
-    private SpriteRenderer sr;
+    protected Rigidbody2D rb;
+    protected Animator anim;
+    protected SpriteRenderer sr;
     public PlayerControls controls;
 
     Vector2 moveInput;
@@ -22,28 +22,28 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;
     public float jumpForce;
     public float jumpsAllowed;
-    private float jumpsRemaining;
-    private bool jumpPressed;
+    protected float jumpsRemaining;
+    protected bool jumpPressed;
 
     // Start is called before the first frame update
-    void Awake()
+    protected void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         controls = new PlayerControls();
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
     }
-    private void OnEnable()
+    protected void OnEnable()
     {
         controls.Enable();
     }
 
-    private void OnDisable()
+    protected void OnDisable()
     {
         controls.Disable();
     }
 
-    private void Move(InputAction.CallbackContext ctx)
+    protected void Move(InputAction.CallbackContext ctx)
     {
         moveInput = ctx.action.ReadValue<Vector2>();
     }
@@ -57,13 +57,13 @@ public class PlayerController : MonoBehaviour
         jumpsRemaining = jumpsAllowed;
     }
 
-    private bool IsGrounded()
+    protected bool IsGrounded()
     {
         // Check if the object's collider is touching the Ground layer
         return GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Ground"));
     }
 
-    private void FixedUpdate()
+    protected void FixedUpdate()
     {
         float horizontalMovement = moveInput.x * moveSpeed * Time.fixedDeltaTime;
 
@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
         anim.SetBool("isGrounded", IsGrounded());
 
