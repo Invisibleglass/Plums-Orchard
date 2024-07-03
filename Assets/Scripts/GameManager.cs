@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     private bool gameRunning;
+    private bool timeUpRunning;
     private GameObject player1;
     private GameObject player2;
 
@@ -13,6 +15,11 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public float player2Points;
     private float currentTime;
 
+    [Header("UI")]
+    public Image timesUpImage;
+    public Image drawImage;
+    public GameObject plumVictory;
+    public GameObject peachVictory;
     [Header("Score Texts")]
     public TextMeshProUGUI player1Score;
     public TextMeshProUGUI player2Score;
@@ -43,6 +50,7 @@ public class GameManager : MonoBehaviour
     public float bushSpawnIntervalMin;
     public float bushSpawnIntervalMax;
     public float playTime;
+    public float timeUpPopupTime;
 
     // Start is called before the first frame update
     void Start()
@@ -142,7 +150,32 @@ public class GameManager : MonoBehaviour
         else
         {
             currentTime = 0;
-            // Handle timer expiration (e.g., game over)
+            gameRunning = false;
+            player1.GetComponent<PlayerController>().controls.Disable();
+            StartCoroutine(TimeUp());
+        }
+
+        if (timeUpRunning && timesUpImage.GetComponent<RectTransform>().localScale.x <= 0.75f)
+        {
+            timesUpImage.GetComponent<RectTransform>().localScale += new Vector3(0.1f, 0.1f, 0.1f);
+        }
+    }
+    private IEnumerator TimeUp()
+    {
+        timesUpImage.gameObject.SetActive(true);
+        yield return new WaitForSeconds(timeUpPopupTime);
+        timesUpImage.gameObject.SetActive(false);
+        if (player1Points > player2Points)
+        {
+            plumVictory.SetActive(true);
+        }
+        else if (player2Points > player1Points)
+        {
+            peachVictory.SetActive(true);
+        }
+        else
+        {
+            drawImage.gameObject.SetActive(true);
         }
     }
 }
