@@ -764,8 +764,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 023ad4788cf976949ae7f3863bab20d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player1Points: 0
-  Player2Points: 0
+  player1Points: 0
+  player2Points: 0
+  player1Score: {fileID: 1765062520}
+  player2Score: {fileID: 2098153310}
+  timerText: {fileID: 1167348365}
   player1prefab: {fileID: 2581642572056321711, guid: d6414b0dab204fe4198ba28bbc2bb4c8, type: 3}
   player2prefab: {fileID: 8792138732648128527, guid: 7fb54956f9546304ea2322205ec68641, type: 3}
   player1Spawn: {fileID: 2081805313}
@@ -791,6 +794,7 @@ MonoBehaviour:
   treeSpawnIntervalMax: 10
   bushSpawnIntervalMin: 5
   bushSpawnIntervalMax: 10
+  playTime: 60
 --- !u!4 &745822141
 Transform:
   m_ObjectHideFlags: 0

@@ -77,7 +77,6 @@ public class WalkingEnemy : MonoBehaviour
     // FixedUpdate is used for physics calculations
     private void FixedUpdate()
     {
-        Debug.Log("current mouse target" + currentTarget);
         if (currentTarget != null)
         {
             // Calculate direction towards the current target

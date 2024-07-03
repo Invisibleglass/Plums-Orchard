@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4c295ab0ff3d2ac419eabe3690d50d42
+guid: 5ae7f91c24d35dc489ec2cacc3d96a73
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 22
+  spritePixelsToUnits: 44
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: chara_p_0
+      name: chara_p_2_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 67
-        width: 36
-        height: 48
+        x: 14
+        y: 134
+        width: 72
+        height: 96
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 647be5e0a3a25e44e811e3750346a011
-      internalID: -1807224686
+      spriteID: 0b0bd3ff3f64d0f418f4383795b9c1be
+      internalID: 1799841975
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: chara_p_1
+      name: chara_p_2_1
       rect:
         serializedVersion: 2
-        x: 48
-        y: 67
-        width: 36
-        height: 48
+        x: 96
+        y: 134
+        width: 72
+        height: 96
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,20 +132,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 10414623f72f3444991a51a2f47585fa
-      internalID: 1489033592
+      spriteID: fe4713910d39bb7459ae581654d675dc
+      internalID: 1440537759
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: chara_p_2
+      name: chara_p_2_2
       rect:
         serializedVersion: 2
-        x: 87
-        y: 67
-        width: 51
-        height: 48
+        x: 174
+        y: 134
+        width: 102
+        height: 96
       alignment: 9
       pivot: {x: 0.35, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,20 +153,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f8bf1417d56ff7e47a245f74fb921153
-      internalID: -1073536238
+      spriteID: ae5edddcf72dc63449a782ead84f7dff
+      internalID: -776340220
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: chara_p_3
+      name: chara_p_2_3
       rect:
         serializedVersion: 2
-        x: 139
-        y: 67
-        width: 51
-        height: 48
+        x: 278
+        y: 134
+        width: 102
+        height: 96
       alignment: 9
       pivot: {x: 0.35, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,41 +174,146 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8f3ee90191b97d140b3b8c3ed3986a03
-      internalID: 1009781028
+      spriteID: 57427713cc1e58a419bd1671959dc709
+      internalID: 432327089
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: chara_p_4
+      name: chara_p_2_4
       rect:
         serializedVersion: 2
-        x: 195
+        x: 390
+        y: 136
+        width: 102
+        height: 104
+      alignment: 9
+      pivot: {x: 0.35, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e589ce9ca4cc425478fb1d09c42fea29
+      internalID: 1360798483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chara_p_2_5
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 20
+        width: 72
+        height: 96
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26e4062a219800f4fad048da52481356
+      internalID: -1411335778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chara_p_2_6
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 20
+        width: 72
+        height: 96
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e770b889f3119040aca0adde07205b8
+      internalID: 1556334170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chara_p_2_7
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 20
+        width: 64
+        height: 96
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d0f97411daad5843845ad36c960e4f8
+      internalID: 224594818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chara_p_2_8
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 20
+        width: 64
+        height: 96
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f96fd1cbc9414c34fb8ebd56dee6eead
+      internalID: -527435999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chara_p_2_9
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 22
+        width: 72
+        height: 104
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e77c0f8f76b189945a173854f2e891a9
+      internalID: -908846297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chara_p_2_10
+      rect:
+        serializedVersion: 2
+        x: 416
         y: 68
-        width: 51
-        height: 52
-      alignment: 9
-      pivot: {x: 0.35, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 702716f643c5df748b712d20d948d26a
-      internalID: -1777854910
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: chara_p_5
-      rect:
-        serializedVersion: 2
-        x: 7
-        y: 10
-        width: 36
-        height: 48
+        width: 40
+        height: 26
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -216,113 +321,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2affe06bd0c481f418253e0d9a5b5dac
-      internalID: -1414477845
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: chara_p_6
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 10
-        width: 36
-        height: 48
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5c6085ace2cba3946abd70ba60d02a62
-      internalID: -80775289
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: chara_p_7
-      rect:
-        serializedVersion: 2
-        x: 87
-        y: 10
-        width: 32
-        height: 48
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5256889da2baf1044a9ca57c0ab60d77
-      internalID: -282071089
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: chara_p_8
-      rect:
-        serializedVersion: 2
-        x: 123
-        y: 10
-        width: 32
-        height: 48
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1d0f204603ac6a140862325c5b42161b
-      internalID: -577274240
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: chara_p_9
-      rect:
-        serializedVersion: 2
-        x: 162
-        y: 11
-        width: 36
-        height: 52
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a6d2d458bdd2aa841a8f7716f9cf1137
-      internalID: -163959829
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: chara_p_10
-      rect:
-        serializedVersion: 2
-        x: 208
-        y: 34
-        width: 20
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3f6d31ee74cc70d43a67f906b65bbf84
-      internalID: 336635580
+      spriteID: bb618865d9d79144baccca0312ef8008
+      internalID: 539224252
       vertices: []
       indices: 
       edges: []
@@ -338,17 +338,17 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      chara_p_0: -1807224686
-      chara_p_1: 1489033592
-      chara_p_10: 336635580
-      chara_p_2: -1073536238
-      chara_p_3: 1009781028
-      chara_p_4: -1777854910
-      chara_p_5: -1414477845
-      chara_p_6: -80775289
-      chara_p_7: -282071089
-      chara_p_8: -577274240
-      chara_p_9: -163959829
+      chara_p_2_0: 1799841975
+      chara_p_2_1: 1440537759
+      chara_p_2_10: 539224252
+      chara_p_2_2: -776340220
+      chara_p_2_3: 432327089
+      chara_p_2_4: 1360798483
+      chara_p_2_5: -1411335778
+      chara_p_2_6: 1556334170
+      chara_p_2_7: 224594818
+      chara_p_2_8: -527435999
+      chara_p_2_9: -908846297
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

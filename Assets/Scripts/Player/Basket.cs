@@ -8,7 +8,9 @@ public class Basket : MonoBehaviour
     {
         if(collision.CompareTag("fruit"))
         {
-            //collect points from fruit by checking parent object
+            GameObject player = GetComponentInParent<PlayerController>().gameObject;
+            int points = collision.GetComponent<Fruit>().points;
+            GameObject.Find("GameManager").GetComponent<GameManager>().UpdateScore(player, points);
             Destroy(collision.gameObject);
         }
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,9 +9,14 @@ public class GameManager : MonoBehaviour
     private GameObject player1;
     private GameObject player2;
 
-    [HideInInspector] public float Player1Points;
-    [HideInInspector] public float Player2Points;
+    [HideInInspector] public float player1Points;
+    [HideInInspector] public float player2Points;
+    private float currentTime;
 
+    [Header("Score Texts")]
+    public TextMeshProUGUI player1Score;
+    public TextMeshProUGUI player2Score;
+    public TextMeshProUGUI timerText;
     [Header("Players")]
     public PlayerController player1prefab;
     public PlayerController player2prefab;
@@ -31,20 +37,42 @@ public class GameManager : MonoBehaviour
     [Header("Bush Spawn Points")]
     public Transform bushLeft;
     public Transform bushRight;
-    [Header("Spawn Varibles")]
+    [Header("Varibles")]
     public float treeSpawnIntervalMin;
     public float treeSpawnIntervalMax;
     public float bushSpawnIntervalMin;
     public float bushSpawnIntervalMax;
+    public float playTime;
 
     // Start is called before the first frame update
     void Start()
     {
+        currentTime = playTime;
+        UpdateTimerDisplay();
+
         player1 = Instantiate(player1prefab.gameObject, player1Spawn.transform.position, player1Spawn.transform.rotation);
         player2 = Instantiate(player2prefab.gameObject, player2Spawn.transform.position, player2Spawn.transform.rotation);
 
         StartCoroutine(SpawnTreeObjects());
         StartCoroutine(SpawnBushObjects());
+    }
+
+    public void UpdateScore(GameObject player, int points)
+    {
+        if (player == player1)
+        {
+            player1Points += points;
+            player1Score.text = player1Points.ToString();
+        }
+        else if (player == player2)
+        {
+            player2Points += points;
+            player2Score.text = player2Points.ToString();
+        }
+        else
+        {
+            Debug.Log("Player could not be identified");
+        }
     }
 
     private IEnumerator SpawnTreeObjects()
@@ -93,9 +121,28 @@ public class GameManager : MonoBehaviour
             Instantiate(choosenSpawn, new Vector3(spawnLocation, bushLeft.position.y), choosenSpawn.transform.rotation);
         }
     }
-    // Update is called once per frame
-    void Update()
+
+    void UpdateTimerDisplay()
     {
-        
+        // Display only seconds
+        int seconds = Mathf.FloorToInt(currentTime);
+        string timerString = seconds.ToString();
+
+        // Update the timer text
+        timerText.text = timerString;
+    }
+
+    private void Update()
+    {
+        if (currentTime > 0)
+        {
+            currentTime -= Time.deltaTime;
+            UpdateTimerDisplay();
+        }
+        else
+        {
+            currentTime = 0;
+            // Handle timer expiration (e.g., game over)
+        }
     }
 }
