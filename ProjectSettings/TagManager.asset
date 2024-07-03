@@ -50,3 +50,6 @@ TagManager:
   - name: Gameplay
     uniqueID: 1856518989
     locked: 0
+  - name: HUD
+    uniqueID: 515739517
+    locked: 0

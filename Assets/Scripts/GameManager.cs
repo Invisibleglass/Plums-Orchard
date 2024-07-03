@@ -19,16 +19,23 @@ public class GameManager : MonoBehaviour
     public GameObject player2Spawn;
     [Header("Fruits and Snek")]
     public List<GameObject> treeSpawnables;
-    [Header("TreeSpawnPoints")]
+    [Header("Bush Spawns")]
+    public List<GameObject> bushSpawnables;
+    [Header("Tree Spawn Points")]
     public Transform highLeft;
     public Transform highRight;
     public Transform lowLeft;
     public Transform lowLeftR;
     public Transform lowRight;
     public Transform lowRightL;
-    [Header("SpawnVaribles")]
-    public float spawnIntervalMin;
-    public float SpawnIntervalMax;
+    [Header("Bush Spawn Points")]
+    public Transform bushLeft;
+    public Transform bushRight;
+    [Header("Spawn Varibles")]
+    public float treeSpawnIntervalMin;
+    public float treeSpawnIntervalMax;
+    public float bushSpawnIntervalMin;
+    public float bushSpawnIntervalMax;
 
     // Start is called before the first frame update
     void Start()
@@ -37,15 +44,16 @@ public class GameManager : MonoBehaviour
         player2 = Instantiate(player2prefab.gameObject, player2Spawn.transform.position, player2Spawn.transform.rotation);
 
         StartCoroutine(SpawnTreeObjects());
+        StartCoroutine(SpawnBushObjects());
     }
 
-    protected IEnumerator SpawnTreeObjects()
+    private IEnumerator SpawnTreeObjects()
     {
         gameRunning = true;
         while (gameRunning)
         {
             // Randomly determine how long to wait before changing direction
-            float waitTime = Random.Range(spawnIntervalMin, SpawnIntervalMax);
+            float waitTime = Random.Range(treeSpawnIntervalMin, treeSpawnIntervalMax);
             yield return new WaitForSeconds(waitTime);
 
             GameObject choosenSpawn = treeSpawnables[Random.Range(0, treeSpawnables.Count)];
@@ -69,7 +77,23 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-        // Update is called once per frame
+
+    private IEnumerator SpawnBushObjects()
+    {
+        gameRunning = true;
+        while (gameRunning)
+        {
+            // Randomly determine how long to wait before changing direction
+            float waitTime = Random.Range(bushSpawnIntervalMin, bushSpawnIntervalMax);
+            yield return new WaitForSeconds(waitTime);
+
+            GameObject choosenSpawn = bushSpawnables[Random.Range(0, bushSpawnables.Count)];
+            int randomNum = (Random.Range(0, 2));
+            float spawnLocation = randomNum == 0 ? bushLeft.position.x : bushRight.position.x;
+            Instantiate(choosenSpawn, new Vector3(spawnLocation, bushLeft.position.y), choosenSpawn.transform.rotation);
+        }
+    }
+    // Update is called once per frame
     void Update()
     {
         
