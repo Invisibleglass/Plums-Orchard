@@ -9259,7 +9259,7 @@ MonoBehaviour:
   bushLeft: {fileID: 1612638343}
   bushRight: {fileID: 1081615659}
   treeSpawnIntervalMin: 1
-  treeSpawnIntervalMax: 5
+  treeSpawnIntervalMax: 3
   bushSpawnIntervalMin: 5
   bushSpawnIntervalMax: 10
   playTime: 201

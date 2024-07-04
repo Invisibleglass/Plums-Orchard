@@ -276,4 +276,5 @@ MonoBehaviour:
   changeDirectionIntervalMax: 10
   deathTime: 1
   points: 50
+  damagePoints: 50
   bounceBox: {fileID: 3337633425035209748}

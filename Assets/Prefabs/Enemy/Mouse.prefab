@@ -210,6 +210,7 @@ MonoBehaviour:
   changeDirectionIntervalMax: 10
   deathTime: 1
   points: 50
+  damagePoints: 50
 --- !u!95 &9000735542153452817
 Animator:
   serializedVersion: 5
