@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour
     public void Ouch()
     {
         StartCoroutine(OuchRoutine());
-        GetComponent<BoxCollider2D>().excludeLayers = LayerMask.GetMask("enemies");
+        GetComponent<BoxCollider2D>().excludeLayers = LayerMask.GetMask("Enemy");
     }
 
     protected IEnumerator OuchRoutine()

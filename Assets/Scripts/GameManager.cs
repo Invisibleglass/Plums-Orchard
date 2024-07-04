@@ -135,13 +135,15 @@ public class GameManager : MonoBehaviour
                     bool leftOrRight = randomNum == 0 ? true : false;
                     if (leftOrRight)
                     {
-                        GameObject doubleFruit = Instantiate(choosenSpawn, new Vector3(Random.Range(lowLeft.position.x, lowLeftR.position.x), Random.Range(lowLeft.position.y, lowLeftR.position.y)), choosenSpawn.transform.rotation);
-                        doubleFruit.GetComponent<Fruit>().points *= 2;
+                        GameObject spawned = Instantiate(choosenSpawn, new Vector3(Random.Range(lowLeft.position.x, lowLeftR.position.x), Random.Range(lowLeft.position.y, lowLeftR.position.y)), choosenSpawn.transform.rotation);
+                        if(spawned.GetComponent<Fruit>() != null)
+                            spawned.GetComponent<Fruit>().points *= 2;
                     }
                     else
                     {
-                        GameObject doubleFruit = Instantiate(choosenSpawn, new Vector3(Random.Range(lowRight.position.x, lowRightL.position.x), Random.Range(lowRight.position.y, lowRightL.position.y)), choosenSpawn.transform.rotation);
-                        doubleFruit.GetComponent<Fruit>().points *= 2;
+                        GameObject spawned = Instantiate(choosenSpawn, new Vector3(Random.Range(lowRight.position.x, lowRightL.position.x), Random.Range(lowRight.position.y, lowRightL.position.y)), choosenSpawn.transform.rotation);
+                        if (spawned.GetComponent<Fruit>() != null)
+                            spawned.GetComponent<Fruit>().points *= 2;
                     }
                 }
             }
