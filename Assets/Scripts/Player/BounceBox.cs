@@ -11,7 +11,8 @@ public class BounceBox : MonoBehaviour
         if (collision.CompareTag("bouncable"))
         {
             player.BounceMe();
-            collision.GetComponentInParent<WalkingEnemy>().DeathAnimation();
+            if (collision.GetComponentInParent<WalkingEnemy>() != null)
+                collision.GetComponentInParent<WalkingEnemy>().DeathAnimation();
         }
     }
 }
