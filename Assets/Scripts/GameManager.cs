@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     private bool gameRunning;
     private bool timeUpRunning;
     private bool tickingStarted;
+    private bool paused;
     private GameObject player1;
     private GameObject player2;
 
@@ -19,6 +20,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Sounds")]
     public AudioClip tickingSound;
+    public AudioClip victorySound;
+    public AudioClip buttonClickSound;
     [Header("UI")]
     public Image timesUpImage;
     public Image drawImage;
@@ -26,7 +29,10 @@ public class GameManager : MonoBehaviour
     public GameObject player2Crown;
     public GameObject plumVictory;
     public GameObject peachVictory;
+    public Button pauseButton;
+    public Button playButton;
     public List<Button> toMainMenuButtons;
+    public GameObject pauseScreen;
     [Header("Score Texts")]
     public TextMeshProUGUI player1Score;
     public TextMeshProUGUI player2Score;
@@ -68,6 +74,12 @@ public class GameManager : MonoBehaviour
             if (toMainMenuButtons[i])
                 toMainMenuButtons[i].onClick.AddListener(ToMainMenu);
         }
+
+        if (pauseButton)
+            pauseButton.onClick.AddListener(PauseScreenToggle);
+        if (playButton)
+            playButton.onClick.AddListener(PauseScreenToggle);
+
         currentTime = playTime;
         UpdateTimerDisplay();
 
@@ -81,7 +93,31 @@ public class GameManager : MonoBehaviour
 
     private void ToMainMenu()
     {
+        GameObject.Find("SoundManager").GetComponent<SoundManager>().PlayOneShot(buttonClickSound);
         SceneManager.LoadScene("MainMenu");
+    }
+
+    private void PauseScreenToggle()
+    {
+        GameObject.Find("SoundManager").GetComponent<SoundManager>().PlayOneShot(buttonClickSound);
+        if (!paused)
+        {
+            paused = true;
+            pauseButton.gameObject.SetActive(false);
+            pauseScreen.SetActive(true);
+            Time.timeScale = 0f;
+            player1.GetComponent<PlayerController>().controls.Disable();
+            player2.GetComponent<PlayerController>().controls.Disable();
+        }
+        else
+        {
+            paused = false;
+            pauseButton.gameObject.SetActive(true);
+            pauseScreen.SetActive(false);
+            Time.timeScale = 1f;
+            player1.GetComponent<PlayerController>().controls.Enable();
+            player2.GetComponent<PlayerController>().controls.Enable();
+        }
     }
 
     public void UpdateScore(GameObject player, int points)
@@ -181,12 +217,20 @@ public class GameManager : MonoBehaviour
 
     void UpdateTimerDisplay()
     {
+        string previousTime = timerText.text;
+
         // Display only seconds
         int seconds = Mathf.FloorToInt(currentTime);
         string timerString = seconds.ToString();
 
         // Update the timer text
         timerText.text = timerString;
+
+        if (previousTime != timerText.text && float.Parse(timerText.text) <= 5f && float.Parse(timerText.text) >= 0)
+        {
+            Debug.Log("Previous Time: " + previousTime + "Current Time: " + timerText.text);
+            FindObjectOfType<SoundManager>().PlayOneShot(buttonClickSound);
+        }
     }
 
     private void Update()
@@ -195,11 +239,6 @@ public class GameManager : MonoBehaviour
         {
             currentTime -= Time.deltaTime;
             UpdateTimerDisplay();
-            if (Mathf.FloorToInt(currentTime) -1 <= tickingStartTime && !tickingStarted)
-            {
-                tickingStarted = true;
-                StartCoroutine(TickingTime());
-            }
         }
         else
         {
@@ -221,7 +260,6 @@ public class GameManager : MonoBehaviour
                     Destroy(fruits[i]);
                 }
                 StartCoroutine(TimeUp());
-                StopCoroutine(TickingTime());
             }
         }
 
@@ -236,25 +274,20 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private IEnumerator TickingTime()
-    {
-        yield return new WaitForSeconds(1f);
-        GameObject.Find("SoundManager").GetComponent<SoundManager>().PlayOneShot(tickingSound);
-    }
-
     private IEnumerator TimeUp()
     {
         timeUpRunning = true;
-        GameObject.Find("SoundManager").GetComponent<SoundManager>().StopAllSFX();
         timesUpImage.gameObject.SetActive(true);
         yield return new WaitForSeconds(timeUpPopupTime);
         timesUpImage.gameObject.SetActive(false);
         if (player1Points > player2Points)
         {
+            FindFirstObjectByType<SoundManager>().PlayOneShot(victorySound);
             plumVictory.SetActive(true);
         }
         else if (player2Points > player1Points)
         {
+            FindFirstObjectByType<SoundManager>().PlayOneShot(victorySound);
             peachVictory.SetActive(true);
         }
         else

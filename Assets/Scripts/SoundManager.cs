@@ -7,14 +7,27 @@ using UnityEngine.Audio;
 public class SoundManager : MonoBehaviour
 {
     private List<AudioSource> currentAudioSources = new List<AudioSource>();
+    private AudioSource currentSong;
+    private List<AudioSource> tickingSounds;
 
     public AudioMixerGroup sFXMixerGroup;
     public AudioMixerGroup musicMixerGroup;
+    public AudioClip songLoop;
 
     // Start is called before the first frame update
     void Start()
     {
+        currentSong = GetComponent<AudioSource>();
+        float introLength = currentSong.clip.length;
+
         //currentAudioSources.Add(gameObject.GetComponent<AudioSource>());
+    }
+
+    private void IntroEnded()
+    {
+        currentSong.clip = songLoop;
+        currentSong.Play();
+        currentSong.loop = true;
     }
 
     public void PlayOneShot(AudioClip clip)
@@ -35,6 +48,7 @@ public class SoundManager : MonoBehaviour
         temp.PlayOneShot(clip);
         StartCoroutine(WaitForOneShot(clip, temp));
     }
+
     IEnumerator WaitForOneShot(AudioClip clip, AudioSource audioSource)
     {
         float lengthOfAudio = clip.length;
@@ -43,11 +57,11 @@ public class SoundManager : MonoBehaviour
         Destroy(audioSource);
     }
 
-    public void StopAllSFX()
+    private void Update()
     {
-        for (int i = 0; i < currentAudioSources.Count; i++)
+        if (!currentSong.isPlaying)
         {
-            Destroy(currentAudioSources[i]);
+            IntroEnded();
         }
     }
 }
