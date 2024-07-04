@@ -53,7 +53,7 @@ public class WalkingEnemy : MonoBehaviour
         StartCoroutine(ChangeDirectionRoutine());
     }
 
-    protected IEnumerator ChangeDirectionRoutine()
+    protected virtual IEnumerator ChangeDirectionRoutine()
     {
         while (!dieingBool)
         {
@@ -76,7 +76,6 @@ public class WalkingEnemy : MonoBehaviour
                 }
             }
         }
-
     }
 
     protected IEnumerator Death()
