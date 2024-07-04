@@ -25,20 +25,18 @@ public class Cloud : MonoBehaviour
         while (true)
         {
             // Teleport towards the current clamp
-            Vector3 direction = (currentClamp.transform.position - transform.position).normalized;
+            Vector3 direction = new Vector3(currentClamp.transform.position.x - transform.position.x, 0, 0).normalized;
             targetPosition = transform.position + direction * teleportDistance;
             transform.position = targetPosition;
 
             // Check distance to current clamp
-            float distanceToClamp = Vector3.Distance(transform.position, currentClamp.transform.position);
+            float distanceToClamp = transform.position.x - currentClamp.transform.position.x;
 
             // Switch to the other clamp if close enough
             if (distanceToClamp <= switchDistance)
             {
                 if (currentClamp == clamps[1])
-                    currentClamp = clamps[0];
-                else
-                    currentClamp = clamps[1];
+                    Destroy(gameObject);
             }
 
             yield return new WaitForSeconds(timeBetweemTeleports); // Wait for half a second before teleporting again

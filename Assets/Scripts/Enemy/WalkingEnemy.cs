@@ -51,17 +51,20 @@ public class WalkingEnemy : MonoBehaviour
             // Randomly determine how long to wait before changing direction
             float waitTime = Random.Range(changeDirectionIntervalMin, changeDirectionIntervalMax);
             yield return new WaitForSeconds(waitTime);
+            if (!dieingBool)
+            {
 
-            // Determine new target based on current position relative to centerScreen
-            if (currentTarget != targets[0])
-            {
-                currentTarget = targets[0];
-                sr.flipX = true;
-            }
-            else
-            {
-                currentTarget = targets[1];
-                sr.flipX = false;
+                // Determine new target based on current position relative to centerScreen
+                if (currentTarget != targets[0])
+                {
+                    currentTarget = targets[0];
+                    sr.flipX = true;
+                }
+                else
+                {
+                    currentTarget = targets[1];
+                    sr.flipX = false;
+                }
             }
         }
 
