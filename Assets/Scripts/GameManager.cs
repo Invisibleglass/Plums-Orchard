@@ -165,6 +165,7 @@ public class GameManager : MonoBehaviour
         else
         {
             currentTime = 0;
+            timerText.text = currentTime.ToString();
             if (!timeUpRunning)
             {
                 gameRunning = false;

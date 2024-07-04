@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 3116952958977489555}
   - component: {fileID: 6219170569240562005}
   - component: {fileID: 568440356401251123}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Snek
   m_TagString: enemy
   m_Icon: {fileID: 0}
@@ -229,7 +229,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

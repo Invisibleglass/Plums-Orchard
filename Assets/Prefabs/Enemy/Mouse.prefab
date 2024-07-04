@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 6059200728563391214}
   - component: {fileID: 9000735542153452817}
   - component: {fileID: 4894281118634971206}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mouse
   m_TagString: enemy
   m_Icon: {fileID: 0}
@@ -245,7 +245,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

@@ -20,6 +20,7 @@ public class WalkingEnemy : MonoBehaviour
     public float changeDirectionIntervalMin;
     public float changeDirectionIntervalMax;
     public float deathTime;
+    public int points;
 
     // Start is called before the first frame update
     private void Start()
