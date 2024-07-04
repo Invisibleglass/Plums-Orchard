@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 568440356401251123}
   m_Layer: 0
   m_Name: Snek
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

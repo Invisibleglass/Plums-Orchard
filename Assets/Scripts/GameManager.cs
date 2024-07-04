@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
     public Image drawImage;
     public GameObject plumVictory;
     public GameObject peachVictory;
+    public List<Button> toMainMenuButtons;
     [Header("Score Texts")]
     public TextMeshProUGUI player1Score;
     public TextMeshProUGUI player2Score;
@@ -55,14 +57,25 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        for (int i = 0; i < toMainMenuButtons.Count; i++)
+        {
+            if (toMainMenuButtons[i])
+                toMainMenuButtons[i].onClick.AddListener(ToMainMenu);
+        }
         currentTime = playTime;
         UpdateTimerDisplay();
 
         player1 = Instantiate(player1prefab.gameObject, player1Spawn.transform.position, player1Spawn.transform.rotation);
         player2 = Instantiate(player2prefab.gameObject, player2Spawn.transform.position, player2Spawn.transform.rotation);
 
+        gameRunning = true;
         StartCoroutine(SpawnTreeObjects());
         StartCoroutine(SpawnBushObjects());
+    }
+
+    private void ToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void UpdateScore(GameObject player, int points)
@@ -85,30 +98,31 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator SpawnTreeObjects()
     {
-        gameRunning = true;
         while (gameRunning)
         {
             // Randomly determine how long to wait before changing direction
             float waitTime = Random.Range(treeSpawnIntervalMin, treeSpawnIntervalMax);
             yield return new WaitForSeconds(waitTime);
-
-            GameObject choosenSpawn = treeSpawnables[Random.Range(0, treeSpawnables.Count)];
-            if (Random.Range(0,5) != 4)
+            if (gameRunning)
             {
-                Instantiate(choosenSpawn, new Vector3 (Random.Range(highLeft.position.x, highRight.position.x), highLeft.position.y), choosenSpawn.transform.rotation);
-            }
-            else
-            {
-                int randomNum = (Random.Range(0, 2));
-                Debug.Log("Random Spawn lower = " + randomNum);
-                bool leftOrRight = randomNum == 0 ? true : false;
-                if (leftOrRight)
+                GameObject choosenSpawn = treeSpawnables[Random.Range(0, treeSpawnables.Count)];
+                if (Random.Range(0, 5) != 4)
                 {
-                    Instantiate(choosenSpawn, new Vector3(Random.Range(lowLeft.position.x, lowLeftR.position.x), Random.Range(lowLeft.position.y, lowLeftR.position.y)), choosenSpawn.transform.rotation);
+                    Instantiate(choosenSpawn, new Vector3(Random.Range(highLeft.position.x, highRight.position.x), highLeft.position.y), choosenSpawn.transform.rotation);
                 }
                 else
                 {
-                    Instantiate(choosenSpawn, new Vector3(Random.Range(lowRight.position.x, lowRightL.position.x), Random.Range(lowRight.position.y, lowRightL.position.y)), choosenSpawn.transform.rotation);
+                    int randomNum = (Random.Range(0, 2));
+                    Debug.Log("Random Spawn lower = " + randomNum);
+                    bool leftOrRight = randomNum == 0 ? true : false;
+                    if (leftOrRight)
+                    {
+                        Instantiate(choosenSpawn, new Vector3(Random.Range(lowLeft.position.x, lowLeftR.position.x), Random.Range(lowLeft.position.y, lowLeftR.position.y)), choosenSpawn.transform.rotation);
+                    }
+                    else
+                    {
+                        Instantiate(choosenSpawn, new Vector3(Random.Range(lowRight.position.x, lowRightL.position.x), Random.Range(lowRight.position.y, lowRightL.position.y)), choosenSpawn.transform.rotation);
+                    }
                 }
             }
         }
@@ -116,17 +130,18 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator SpawnBushObjects()
     {
-        gameRunning = true;
         while (gameRunning)
         {
             // Randomly determine how long to wait before changing direction
             float waitTime = Random.Range(bushSpawnIntervalMin, bushSpawnIntervalMax);
             yield return new WaitForSeconds(waitTime);
-
-            GameObject choosenSpawn = bushSpawnables[Random.Range(0, bushSpawnables.Count)];
-            int randomNum = (Random.Range(0, 2));
-            float spawnLocation = randomNum == 0 ? bushLeft.position.x : bushRight.position.x;
-            Instantiate(choosenSpawn, new Vector3(spawnLocation, bushLeft.position.y), choosenSpawn.transform.rotation);
+            if (gameRunning)
+            {
+                GameObject choosenSpawn = bushSpawnables[Random.Range(0, bushSpawnables.Count)];
+                int randomNum = (Random.Range(0, 2));
+                float spawnLocation = randomNum == 0 ? bushLeft.position.x : bushRight.position.x;
+                Instantiate(choosenSpawn, new Vector3(spawnLocation, bushLeft.position.y), choosenSpawn.transform.rotation);
+            }
         }
     }
 
@@ -150,18 +165,38 @@ public class GameManager : MonoBehaviour
         else
         {
             currentTime = 0;
-            gameRunning = false;
-            player1.GetComponent<PlayerController>().controls.Disable();
-            StartCoroutine(TimeUp());
+            if (!timeUpRunning)
+            {
+                gameRunning = false;
+                player1.GetComponent<PlayerController>().controls.Disable();
+                player2.GetComponent<PlayerController>().controls.Disable();
+                GameObject[] enemies = GameObject.FindGameObjectsWithTag("enemy");
+                for (int i = 0; i < enemies.Length; i++)
+                {
+                    Destroy(enemies[i]);
+                }
+                GameObject[] fruits = GameObject.FindGameObjectsWithTag("fruit");
+                for (int i = 0; i < fruits.Length; i++)
+                {
+                    Destroy(fruits[i]);
+                }
+                StartCoroutine(TimeUp());
+            }
         }
 
         if (timeUpRunning && timesUpImage.GetComponent<RectTransform>().localScale.x <= 0.75f)
         {
-            timesUpImage.GetComponent<RectTransform>().localScale += new Vector3(0.1f, 0.1f, 0.1f);
+            timesUpImage.GetComponent<RectTransform>().localScale += new Vector3(0.005f, 0.005f, 0.005f);
         }
+        if (timeUpRunning && drawImage.gameObject.activeInHierarchy && drawImage.GetComponent<RectTransform>().localScale.x <= 0.75f)
+        {
+            drawImage.GetComponent<RectTransform>().localScale += new Vector3(0.005f, 0.005f, 0.005f);
+        }
+
     }
     private IEnumerator TimeUp()
     {
+        timeUpRunning = true;
         timesUpImage.gameObject.SetActive(true);
         yield return new WaitForSeconds(timeUpPopupTime);
         timesUpImage.gameObject.SetActive(false);
@@ -176,6 +211,9 @@ public class GameManager : MonoBehaviour
         else
         {
             drawImage.gameObject.SetActive(true);
+            yield return new WaitForSeconds(timeUpPopupTime);
+            toMainMenuButtons[2].gameObject.SetActive(true);
         }
+        timesUpImage.gameObject.SetActive(false);
     }
 }

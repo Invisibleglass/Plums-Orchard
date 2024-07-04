@@ -1,49 +1,47 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Cloud : MonoBehaviour
 {
-    public GameObject leftClamp;
-    public GameObject rightClamp;
-    public GameObject currentTarget;
-    public float speed;
-    private Rigidbody2D rb;
+    private GameObject[] clamps;
+    private GameObject currentClamp;
+    private Vector3 targetPosition;
+    public float timeBetweemTeleports = 0.2f;
+    public float teleportDistance = 1.0f; // Distance to teleport towards clamps
+    public float switchDistance = 0.1f; // Distance threshold to switch direction
 
-    private void FixedUpdate()
-    {
-        if (currentTarget != null)
-        {
-            // Calculate direction towards the current target
-            Vector2 direction = (currentTarget.transform.position - transform.position).normalized;
-
-            // Apply velocity based on calculated direction
-            rb.velocity = direction * speed;
-            if(transform.position.x +0.1f >= currentTarget.transform.position.x >= transform.position.x -0.1f)
-            {
-               if (currentTarget == rightClamp)
-               {
-                    currentTarget = leftClamp;
-               }
-               else if (currentTarget == leftClamp)
-               {
-                    currentTarget = rightClamp;
-               }
-            }
-        }
-    }
-
-    // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-       currentTarget = leftClamp;
-
+        if (clamps == null)
+        {
+            clamps = GameObject.FindGameObjectsWithTag("cloudClamps");
+        }
+        currentClamp = clamps[1]; // Start with the left clamp
+        StartCoroutine(TeleportBetweenClamps());
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator TeleportBetweenClamps()
     {
-        
+        while (true)
+        {
+            // Teleport towards the current clamp
+            Vector3 direction = (currentClamp.transform.position - transform.position).normalized;
+            targetPosition = transform.position + direction * teleportDistance;
+            transform.position = targetPosition;
+
+            // Check distance to current clamp
+            float distanceToClamp = Vector3.Distance(transform.position, currentClamp.transform.position);
+
+            // Switch to the other clamp if close enough
+            if (distanceToClamp <= switchDistance)
+            {
+                if (currentClamp == clamps[1])
+                    currentClamp = clamps[0];
+                else
+                    currentClamp = clamps[1];
+            }
+
+            yield return new WaitForSeconds(timeBetweemTeleports); // Wait for half a second before teleporting again
+        }
     }
 }
