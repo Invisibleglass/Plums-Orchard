@@ -106,9 +106,23 @@ public class WalkingEnemy : MonoBehaviour
         StartCoroutine(Death());
     }
 
-    // Update is called once per frame
-    void Update()
+    protected void OnCollisionEnter2D(Collision2D collision)
     {
-
+        if (collision.gameObject.CompareTag("player"))
+        {
+            collision.gameObject.GetComponent<PlayerController>().Ouch();
+            StopCoroutine(ChangeDirectionRoutine());
+            if (currentTarget != targets[0])
+            {
+                currentTarget = targets[0];
+                sr.flipX = true;
+            }
+            else
+            {
+                currentTarget = targets[1];
+                sr.flipX = false;
+            }
+            StartCoroutine(ChangeDirectionRoutine());
+        }
     }
 }

@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;
     public float jumpForce;
     public float jumpsAllowed;
+    public float blinkTime;
     protected float jumpsRemaining;
     protected bool jumpPressed;
 
@@ -57,11 +58,6 @@ public class PlayerController : MonoBehaviour
         jumpsRemaining = jumpsAllowed;
     }
 
-    protected bool IsGrounded()
-    {
-        // Check if the object's collider is touching the Ground layer
-        return GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Ground"));
-    }
 
     protected void FixedUpdate()
     {
@@ -97,6 +93,11 @@ public class PlayerController : MonoBehaviour
             jumpPressed = false; // Reset jumpPressed flag when no longer holding jump input
         }
     }
+    protected bool IsGrounded()
+    {
+        // Check if the object's collider is touching the Ground layer
+        return GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Ground"));
+    }
 
     public void BounceMe()
     {
@@ -104,6 +105,25 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
     }
 
+    public void Ouch()
+    {
+        StartCoroutine(OuchRoutine());
+    }
+
+    protected IEnumerator OuchRoutine()
+    {
+        sr.color = Color.clear;
+        yield return new WaitForSeconds(blinkTime);
+        sr.color = Color.white;
+        yield return new WaitForSeconds(blinkTime);
+        sr.color = Color.clear;
+        yield return new WaitForSeconds(blinkTime);
+        sr.color = Color.white;
+        yield return new WaitForSeconds(blinkTime);
+        sr.color = Color.clear;
+        yield return new WaitForSeconds(blinkTime);
+        sr.color = Color.white;
+    }
     // Update is called once per frame
     protected void Update()
     {
