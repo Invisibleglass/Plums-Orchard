@@ -36,7 +36,7 @@ public class Cloud : MonoBehaviour
             if (distanceToClamp <= switchDistance)
             {
                 if (currentClamp == clamps[1])
-                    Destroy(gameObject);
+                    transform.position = new Vector3(clamps[0].transform.position.x, transform.position.y);
             }
 
             yield return new WaitForSeconds(timeBetweemTeleports); // Wait for half a second before teleporting again
