@@ -202,7 +202,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0.5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -275,4 +275,5 @@ MonoBehaviour:
   changeDirectionIntervalMin: 2
   changeDirectionIntervalMax: 10
   deathTime: 1
+  points: 50
   bounceBox: {fileID: 3337633425035209748}
