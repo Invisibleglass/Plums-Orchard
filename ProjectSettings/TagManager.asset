@@ -12,6 +12,7 @@ TagManager:
   - fruitKiller
   - enemy
   - cloudClamps
+  - player
   layers:
   - Default
   - TransparentFX

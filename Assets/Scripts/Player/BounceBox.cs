@@ -12,8 +12,11 @@ public class BounceBox : MonoBehaviour
         {
             player.BounceMe();
             if (collision.GetComponentInParent<WalkingEnemy>() != null)
+            {
                 collision.GetComponentInParent<WalkingEnemy>().DeathAnimation();
-                GameObject.Find("GameManager").GetComponent<GameManager>().UpdateScore(player.gameObject,collision.GetComponentInParent<WalkingEnemy>().points);
+                collision.GetComponentInParent<WalkingEnemy>().SpawnHitMarker(player);
+                GameObject.Find("GameManager").GetComponent<GameManager>().UpdateScore(player.gameObject, collision.GetComponentInParent<WalkingEnemy>().points);
+            }
         }
     }
 }

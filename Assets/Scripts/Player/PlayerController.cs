@@ -13,7 +13,10 @@ public class PlayerController : MonoBehaviour
 
     Vector2 moveInput;
 
+    [Header("Sounds")]
+    public AudioClip jumpSound;
     [Header("PlayerParts")]
+    public GameObject hitMarkerHelper;
     public GameObject basket;
     public GameObject bounceBox;
     private Vector2 basketOffsetValue = new Vector2(1.05f, 0f); // used when the player moves left and right to put the basket box in the right place
@@ -72,6 +75,7 @@ public class PlayerController : MonoBehaviour
 
             if(IsGrounded())
             {
+                FindObjectOfType<SoundManager>().PlayOneShot(jumpSound);
                 jumpsRemaining = jumpsAllowed;
                 //first jump
                 rb.velocity = new Vector2(rb.velocity.x, 0); //resets vertical velocity
@@ -81,6 +85,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (jumpsRemaining > 0)
             {
+                FindObjectOfType<SoundManager>().PlayOneShot(jumpSound);
                 // Double jump
                 rb.velocity = new Vector2(rb.velocity.x, 0); // Reset vertical velocity
                 rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
@@ -101,6 +106,7 @@ public class PlayerController : MonoBehaviour
 
     public void BounceMe()
     {
+        FindObjectOfType<SoundManager>().PlayOneShot(jumpSound);
         rb.velocity = new Vector2(rb.velocity.x, 0); // Reset vertical velocity
         rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
     }

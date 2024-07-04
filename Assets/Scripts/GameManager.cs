@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 {
     private bool gameRunning;
     private bool timeUpRunning;
+    private bool tickingStarted;
     private GameObject player1;
     private GameObject player2;
 
@@ -16,6 +17,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public float player2Points;
     private float currentTime;
 
+    [Header("Sounds")]
+    public AudioClip tickingSound;
     [Header("UI")]
     public Image timesUpImage;
     public Image drawImage;
@@ -55,6 +58,7 @@ public class GameManager : MonoBehaviour
     public float bushSpawnIntervalMax;
     public float playTime;
     public float timeUpPopupTime;
+    public int tickingStartTime;
 
     // Start is called before the first frame update
     void Start()
@@ -191,6 +195,11 @@ public class GameManager : MonoBehaviour
         {
             currentTime -= Time.deltaTime;
             UpdateTimerDisplay();
+            if (Mathf.FloorToInt(currentTime) -1 <= tickingStartTime && !tickingStarted)
+            {
+                tickingStarted = true;
+                StartCoroutine(TickingTime());
+            }
         }
         else
         {
@@ -212,6 +221,7 @@ public class GameManager : MonoBehaviour
                     Destroy(fruits[i]);
                 }
                 StartCoroutine(TimeUp());
+                StopCoroutine(TickingTime());
             }
         }
 
@@ -225,9 +235,17 @@ public class GameManager : MonoBehaviour
         }
 
     }
+
+    private IEnumerator TickingTime()
+    {
+        yield return new WaitForSeconds(1f);
+        GameObject.Find("SoundManager").GetComponent<SoundManager>().PlayOneShot(tickingSound);
+    }
+
     private IEnumerator TimeUp()
     {
         timeUpRunning = true;
+        GameObject.Find("SoundManager").GetComponent<SoundManager>().StopAllSFX();
         timesUpImage.gameObject.SetActive(true);
         yield return new WaitForSeconds(timeUpPopupTime);
         timesUpImage.gameObject.SetActive(false);

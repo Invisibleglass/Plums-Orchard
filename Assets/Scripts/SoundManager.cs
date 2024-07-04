@@ -14,7 +14,7 @@ public class SoundManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentAudioSources.Add(gameObject.GetComponent<AudioSource>());
+        //currentAudioSources.Add(gameObject.GetComponent<AudioSource>());
     }
 
     public void PlayOneShot(AudioClip clip)
@@ -41,5 +41,13 @@ public class SoundManager : MonoBehaviour
         yield return new WaitForSeconds(lengthOfAudio);
         currentAudioSources.Remove(audioSource);
         Destroy(audioSource);
+    }
+
+    public void StopAllSFX()
+    {
+        for (int i = 0; i < currentAudioSources.Count; i++)
+        {
+            Destroy(currentAudioSources[i]);
+        }
     }
 }

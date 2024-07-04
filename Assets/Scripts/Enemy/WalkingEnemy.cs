@@ -15,6 +15,11 @@ public class WalkingEnemy : MonoBehaviour
     protected GameObject currentTarget;
     protected bool dieingBool = false;
 
+    [Header("Sounds")]
+    public AudioClip hitSound;
+    public AudioClip spawnSound;
+    [Header("HitMarker")]
+    public GameObject hitMarker;
     [Header("Varibles")]
     public float speed;
     public float changeDirectionIntervalMin;
@@ -30,6 +35,8 @@ public class WalkingEnemy : MonoBehaviour
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         targets = GameObject.FindGameObjectsWithTag("target");
+
+        FindObjectOfType<SoundManager>().PlayOneShot(spawnSound);
 
         if (this.transform.position.x > centerScreen.x)
         {
@@ -107,11 +114,26 @@ public class WalkingEnemy : MonoBehaviour
         StartCoroutine(Death());
     }
 
+    public void SpawnHitMarker(PlayerController player)
+    {
+        hitMarker.SetActive(true);
+        // Get the direction to the target
+        Vector3 direction = player.hitMarkerHelper.transform.position - hitMarker.transform.position;
+        direction.z = 0; // Ensure no rotation around the Z-axis
+
+        // Calculate the rotation to look at the target
+        Quaternion rotation = Quaternion.LookRotation(Vector3.forward, direction);
+
+        // Apply the rotation
+        hitMarker.transform.rotation = rotation;
+    }
+
     protected void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("player"))
         {
             collision.gameObject.GetComponent<PlayerController>().Ouch();
+            FindObjectOfType<SoundManager>().PlayOneShot(hitSound);
             GameObject.Find("GameManager").GetComponent<GameManager>().UpdateScore(collision.gameObject, damagePoints);
             StopCoroutine(ChangeDirectionRoutine());
             if (currentTarget != targets[0])
@@ -127,4 +149,6 @@ public class WalkingEnemy : MonoBehaviour
             StartCoroutine(ChangeDirectionRoutine());
         }
     }
+
+
 }

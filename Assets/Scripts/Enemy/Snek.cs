@@ -18,6 +18,7 @@ public class Snek : WalkingEnemy
         sr = GetComponent<SpriteRenderer>();
         targets = GameObject.FindGameObjectsWithTag("target");
 
+        FindObjectOfType<SoundManager>().PlayOneShot(spawnSound);
         if (this.transform.position.x > centerScreen.x)
         {
             sr.flipX = false;
