@@ -21,6 +21,7 @@ public class WalkingEnemy : MonoBehaviour
     public float changeDirectionIntervalMax;
     public float deathTime;
     public int points;
+    public int damagePoints;
 
     // Start is called before the first frame update
     private void Start()
@@ -111,6 +112,7 @@ public class WalkingEnemy : MonoBehaviour
         if (collision.gameObject.CompareTag("player"))
         {
             collision.gameObject.GetComponent<PlayerController>().Ouch();
+            GameObject.Find("GameManager").GetComponent<GameManager>().UpdateScore(collision.gameObject, damagePoints);
             StopCoroutine(ChangeDirectionRoutine());
             if (currentTarget != targets[0])
             {
