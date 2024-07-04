@@ -459,4 +459,4 @@ MonoBehaviour:
   moveSpeed: 200
   jumpForce: 10.25
   jumpsAllowed: 1
-  blinkTime: 0
+  blinkTime: 0.1

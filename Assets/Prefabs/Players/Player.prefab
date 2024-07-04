@@ -135,7 +135,7 @@ MonoBehaviour:
   moveSpeed: 200
   jumpForce: 10.25
   jumpsAllowed: 1
-  blinkTime: 0
+  blinkTime: 0.1
 --- !u!95 &4106127986992615417
 Animator:
   serializedVersion: 5
