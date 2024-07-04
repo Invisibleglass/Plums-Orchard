@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     [Header("UI")]
     public Image timesUpImage;
     public Image drawImage;
+    public GameObject player1Crown;
+    public GameObject player2Crown;
     public GameObject plumVictory;
     public GameObject peachVictory;
     public List<Button> toMainMenuButtons;
@@ -94,6 +96,22 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Player could not be identified");
         }
+
+        if (player1Points > player2Points)
+        {
+            player1Crown.SetActive(true);
+            player2Crown.SetActive(false);
+        }
+        else if (player2Points > player1Points)
+        {
+            player1Crown.SetActive(false);
+            player2Crown.SetActive(true);
+        }
+        else
+        {
+            player1Crown.SetActive(true);
+            player2Crown.SetActive(true);
+        }
     }
 
     private IEnumerator SpawnTreeObjects()
@@ -117,11 +135,13 @@ public class GameManager : MonoBehaviour
                     bool leftOrRight = randomNum == 0 ? true : false;
                     if (leftOrRight)
                     {
-                        Instantiate(choosenSpawn, new Vector3(Random.Range(lowLeft.position.x, lowLeftR.position.x), Random.Range(lowLeft.position.y, lowLeftR.position.y)), choosenSpawn.transform.rotation);
+                        GameObject doubleFruit = Instantiate(choosenSpawn, new Vector3(Random.Range(lowLeft.position.x, lowLeftR.position.x), Random.Range(lowLeft.position.y, lowLeftR.position.y)), choosenSpawn.transform.rotation);
+                        doubleFruit.GetComponent<Fruit>().points *= 2;
                     }
                     else
                     {
-                        Instantiate(choosenSpawn, new Vector3(Random.Range(lowRight.position.x, lowRightL.position.x), Random.Range(lowRight.position.y, lowRightL.position.y)), choosenSpawn.transform.rotation);
+                        GameObject doubleFruit = Instantiate(choosenSpawn, new Vector3(Random.Range(lowRight.position.x, lowRightL.position.x), Random.Range(lowRight.position.y, lowRightL.position.y)), choosenSpawn.transform.rotation);
+                        doubleFruit.GetComponent<Fruit>().points *= 2;
                     }
                 }
             }
