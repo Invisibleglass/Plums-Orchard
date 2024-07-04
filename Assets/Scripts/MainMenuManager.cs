@@ -8,6 +8,11 @@ using System;
 
 public class MainMenuManager : MonoBehaviour
 {
+    private SoundManager soundManager;
+
+    [Header("Sounds")]
+    public AudioClip buttonClickSound;
+
     [Header("Screens")]
     public GameObject mainMenuScreen;
     public GameObject controlsScreen;
@@ -22,6 +27,7 @@ public class MainMenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
         if (startButton)
             startButton.onClick.AddListener(ToGameScene);
         if (controlsButton)
@@ -37,23 +43,27 @@ public class MainMenuManager : MonoBehaviour
 
     private void ToGameScene()
     {
+        soundManager.PlayOneShot(buttonClickSound);
         SceneManager.LoadScene("GameScene");
     }
 
     private void OpenControlsScreen()
     {
+        soundManager.PlayOneShot(buttonClickSound);
         mainMenuScreen.SetActive(false);
         controlsScreen.SetActive(true);
     }
 
     private void OpenCreditsScreen()
     {
+        soundManager.PlayOneShot(buttonClickSound);
         mainMenuScreen.SetActive(false);
         creditsScreen.SetActive(true);
     }
 
     private void OpenMainScreen()
     {
+        soundManager.PlayOneShot(buttonClickSound);
         controlsScreen.SetActive(false);
         creditsScreen.SetActive(false);
         mainMenuScreen.SetActive(true);
