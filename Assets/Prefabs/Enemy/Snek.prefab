@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4197954283800887245
 Transform:
   m_ObjectHideFlags: 0
@@ -276,5 +276,5 @@ MonoBehaviour:
   changeDirectionIntervalMax: 10
   deathTime: 1
   points: 50
-  damagePoints: 50
+  damagePoints: -50
   bounceBox: {fileID: 3337633425035209748}

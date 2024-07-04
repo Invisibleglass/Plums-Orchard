@@ -85,11 +85,19 @@ public class GameManager : MonoBehaviour
         if (player == player1)
         {
             player1Points += points;
+            if (player1Points < 0)
+            {
+                player1Points = 0;
+            }
             player1Score.text = player1Points.ToString();
         }
         else if (player == player2)
         {
             player2Points += points;
+            if (player2Points < 0)
+            {
+                player2Points = 0;
+            }
             player2Score.text = player2Points.ToString();
         }
         else

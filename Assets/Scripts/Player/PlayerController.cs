@@ -108,11 +108,11 @@ public class PlayerController : MonoBehaviour
     public void Ouch()
     {
         StartCoroutine(OuchRoutine());
-        GetComponent<BoxCollider2D>().excludeLayers = LayerMask.GetMask("Enemy");
     }
 
     protected IEnumerator OuchRoutine()
     {
+        GetComponent<BoxCollider2D>().excludeLayers = LayerMask.GetMask("Enemy");
         sr.color = Color.clear;
         yield return new WaitForSeconds(blinkTime);
         sr.color = Color.white;
@@ -124,6 +124,7 @@ public class PlayerController : MonoBehaviour
         sr.color = Color.clear;
         yield return new WaitForSeconds(blinkTime);
         sr.color = Color.white;
+        GetComponent<BoxCollider2D>().excludeLayers = LayerMask.GetMask("Nothing");
     }
     // Update is called once per frame
     protected void Update()
