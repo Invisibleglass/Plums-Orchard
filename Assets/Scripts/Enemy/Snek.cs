@@ -65,6 +65,7 @@ public class Snek : WalkingEnemy
 
     override public void DeathAnimation()
     {
+        GetComponent<BoxCollider2D>().excludeLayers += LayerMask.GetMask("Player");
         currentTarget = null;
         dieingBool = true;
         if (sr.sprite.name == "snek_2_4")
