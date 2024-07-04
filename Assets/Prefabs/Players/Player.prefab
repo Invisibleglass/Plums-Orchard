@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23d850ec0216fd04d9f70539d21b333d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpSound: {fileID: 8300000, guid: e6786bb2a8a3a514d8e649b16f534b79, type: 3}
+  jumpSound: {fileID: 8300000, guid: 158a221a1c9f8914986471f13c233f33, type: 3}
   hitMarkerHelper: {fileID: 3511207715684778292}
   basket: {fileID: 5629764005622033779}
   bounceBox: {fileID: 4383442304978941710}
