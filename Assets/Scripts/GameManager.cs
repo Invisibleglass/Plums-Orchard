@@ -229,7 +229,7 @@ public class GameManager : MonoBehaviour
         if (previousTime != timerText.text && float.Parse(timerText.text) <= 5f && float.Parse(timerText.text) >= 0)
         {
             Debug.Log("Previous Time: " + previousTime + "Current Time: " + timerText.text);
-            FindObjectOfType<SoundManager>().PlayOneShot(buttonClickSound);
+            FindObjectOfType<SoundManager>().PlayOneShot(tickingSound);
         }
     }
 
