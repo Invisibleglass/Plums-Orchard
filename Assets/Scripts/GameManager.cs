@@ -93,6 +93,7 @@ public class GameManager : MonoBehaviour
 
     private void ToMainMenu()
     {
+        Time.timeScale = 1f;
         GameObject.Find("SoundManager").GetComponent<SoundManager>().PlayOneShot(buttonClickSound);
         SceneManager.LoadScene("MainMenu");
     }
